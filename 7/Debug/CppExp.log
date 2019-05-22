@@ -1,0 +1,6 @@
+﻿cl : 命令行 warning D9007: “/Gm”需要“/Zi 或 /ZI”；选项被忽略
+  CppExp.cpp
+c:\users\0\desktop\实验7\Image.h : warning C4819: 该文件包含不能在当前代码页(936)中表示的字符。请将该文件保存为 Unicode 格式以防止数据丢失
+  LINK : 缺少程序数据库 C:\Users\0\Desktop\实验7\CppExp.pdb；正在执行完全链接
+  CppExp.vcxproj -> C:\Users\0\Desktop\实验7\.\CppExp.exe
+  CppExp.vcxproj -> .\CppExp.pdb (Full PDB)
