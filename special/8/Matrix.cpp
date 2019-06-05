@@ -1,6 +1,9 @@
 #include "Matrix.h"
+#include "Image.h"
+
 #include <iostream>
 #include <ctime>
+
 using namespace std;
 
 void Matrix::init(int h, int w)
@@ -118,6 +121,16 @@ int Matrix::Width()   // 获得矩阵的列数
 	return this->width;
 }
 
+int Matrix::Height() const
+{
+	return this->height;
+}
+
+int Matrix::Width() const
+{
+	return this->width;
+}
+
 Matrix Matrix::MajorDiagonal()// 求矩阵主对角线上的元素，输出一个N行1列的矩阵，N为主对角线元素的个数
 {
 	Matrix temp(this->width, 1);
@@ -187,6 +200,51 @@ void Matrix::Transpose() // 将矩阵转置
 
 double& Matrix::At(int row, int col) //获取第row行第col列的矩阵元素的值
 {
+	while (row < 0)
+	{
+		row++;
+	}
+
+	while (col < 0)
+	{
+		col++;
+	}
+
+	while (row > this->height)
+	{
+		row--;
+	}
+
+	while (col > this->width)
+	{
+		col--;
+	}
+	
+	return this->data[row][col];
+}
+
+double Matrix::At(int row, int col) const
+{
+	while (row < 0)
+	{
+		row++;
+	}
+
+	while (col < 0)
+	{
+		col++;
+	}
+
+	while (row >= this->height)
+	{
+		row--;
+	}
+
+	while (col >= this->width)
+	{
+		col--;
+	}
+
 	return this->data[row][col];
 }
 
@@ -405,8 +463,9 @@ Matrix Sub(const Matrix &m1, const Matrix &m2) // 友元函数，将矩阵m1和m2相减，结
 		cout << "error" << endl;
 		return m;
 	}
-
-	Matrix m(m1.height, m1.width);
+	
+	/*Matrix m(m1.height, m1.width);
+	
 	for (int i = 0; i < m1.height; i++)
 		for (int j = 0; j < m1.width; j++)
 		{
@@ -418,7 +477,9 @@ Matrix Sub(const Matrix &m1, const Matrix &m2) // 友元函数，将矩阵m1和m2相减，结
 
 			m.data[i][j] = m1.data[i][j] - m2.data[i][j];
 		}
-
+	
+	return m;*/
+	Matrix m(m1 - m2);
 	return m;
 }
 
@@ -437,4 +498,243 @@ void Swap(Matrix &a, Matrix &b) // 友元函数，交换两个矩阵
 			a.data[i][j] = b.data[i][j];
 			b.data[i][j] = temp;
 		}
+}
+
+//运算符重载函数；
+Matrix& Matrix::operator=(const Matrix &m)  //重载赋值运算符，完成对象间的拷贝；
+{
+	int i;
+	int j;
+
+	if (this->data)
+	{
+		for (i = 0; i < this->height; i++)
+		{
+			delete[] this->data[i];
+		}
+		delete[] this->data;
+	}
+
+	this->init(m.height, m.width);
+
+	for (i = 0; i < this->height; i++)
+		for (j = 0; j < this->width; j++)
+		{
+			this->data[i][j] = m.data[i][j];
+		}
+
+	return *this;
+}
+
+Matrix& Matrix::operator=(double num)
+{
+	for (int i = 0; i < this->height; i++)
+		for (int j = 0; j < this->width; j++)
+		{
+			this->data[i][j] = num;
+		}
+
+	return *this;
+}
+
+bool Matrix::operator==(const Matrix &m)  //判断两个Matrix对象是否相等
+{
+	if (this->height != m.height || this->width != m.width)
+	{
+		return false;
+	}
+	else
+	{
+		for (int i = 0; i < this->height; i++)
+			for (int j = 0; j < this->width; j++)
+			{
+				if (this->data[i][j] != m.data[i][j])
+				{
+					return false;
+				}
+			}
+
+		return true;
+	}
+
+}
+Matrix Matrix::operator+(const Matrix &m)  //两个尺寸相同的矩阵，对应元素的数值相加；
+{
+	if (this->height == m.height && this->width == m.width)
+	{
+		Matrix m(this->height, this->width);
+		for (int i = 0; i < this->height; i++)
+			for (int j = 0; j < this->width; j++)
+			{
+				m.data[i][j] = this->data[i][j] + m.data[i][j];
+			}
+
+		return m;
+	}
+	else
+	{
+		Matrix m;
+		return m;
+	}
+}
+
+Matrix Matrix::operator-(const Matrix &m) const  //两个尺寸相同的矩阵，对应元素的数值相减；
+{
+	if (this->height == m.height && this->width == m.width)
+	{
+		Matrix result(this->height, this->width);
+		for (int i = 0; i < this->height; i++)
+			for (int j = 0; j < this->width; j++)
+			{
+				result.data[i][j] = this->data[i][j] - m.data[i][j];
+			}
+
+		return result;
+	}
+	else
+	{
+		Matrix result;
+		return result;
+	}
+}
+
+
+
+Matrix& Matrix::operator++()  //前置自加；
+{
+	for (int i = 0; i < this->height; i++)
+		for (int j = 0; j < this->width; j++)
+		{
+			this->data[i][j]++;
+		}
+
+	return *this;
+}
+
+Matrix& Matrix::operator--()  //前置自减；
+{
+	for (int i = 0; i < this->height; i++)
+		for (int j = 0; j < this->width; j++)
+		{
+			this->data[i][j]--;
+		}
+
+	return *this;
+}
+
+Matrix Matrix::operator++(int)  //后置自加；
+{
+	Matrix origin(*this);
+
+	for (int i = 0; i < this->height; i++)
+	{
+		for (int j = 0; j < this->width; j++)
+		{
+			this->data[i][j]++;
+		}
+	}
+
+	return origin;
+}
+
+Matrix Matrix::operator--(int)  //后置自减；
+{
+	Matrix origin(*this);
+
+	for (int i = 0; i < this->height; i++)
+	{
+		for (int j = 0; j < this->width; j++)
+		{
+			this->data[i][j]--;
+		}
+	}
+
+	return origin;
+}
+
+//所有元素加上同一数值;
+Matrix operator+(Matrix &m, double num)
+{
+	Matrix result(m);
+	for (int i = 0; i < result.height; i++)
+		for (int j = 0; j < result.width; j++)
+		{
+			result.data[i][j] += num;
+		}
+
+	return result;
+}
+
+//所有元素减去同一数值;
+Matrix operator-(Matrix &m, double num)
+{
+	return m + (-num);
+}
+
+//所有元素乘上同一数值;
+Matrix operator*(Matrix &m, double num)
+{
+	Matrix result(m);
+
+	for (int i = 0; i < m.height; i++)
+		for (int j = 0; j < m.width; j++)
+		{
+			m.data[i][j] *= num;
+		}
+
+	return result;
+}
+
+//所有元素除以同一数值;
+Matrix operator/(Matrix &m, double num)
+{
+	return m * (1 / num);
+}
+
+Matrix Matrix::operator*(const Image &img)  //两幅尺寸相同的图像，对应像素点的数值相乘；
+{
+	if (this->height != img.height || this->width != img.width)
+	{
+		Matrix m;
+		cout << "error" << endl;
+		return m;
+	}
+
+	Matrix m(this->height, this->width);
+
+	for (int i = 0; i < this->height; i++)
+		for (int j = 0; j < this->width; j++)
+		{
+			m.data[i][j] = this->data[i][j] * img.data[i][j];
+			if (m.data[i][j] > 255)
+			{
+				m.data[i][j] = 255;
+			}
+		}
+
+	return m;
+}
+
+Matrix Matrix::operator/(const Image &img)  //两幅尺寸相同的图像，对应像素点的数值相除；
+{
+	if (this->height != img.height || this->width != img.width)
+	{
+		Matrix m;
+		cout << "error" << endl;
+		return m;
+	}
+
+	Matrix m(this->height, this->width);
+
+	for (int i = 0; i < this->height; i++)
+		for (int j = 0; j < this->width; j++)
+		{
+			m.data[i][j] = this->data[i][j] / img.data[i][j];
+			if (m.data[i][j] > 255)
+			{
+				m.data[i][j] = 255;
+			}
+		}
+
+	return m;
 }

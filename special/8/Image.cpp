@@ -1,5 +1,9 @@
 #include "Image.h"
+
+#include <iostream>
 #include "highgui.h"
+
+using namespace std;
 
 Image::Image(char* ImageName)
 {
@@ -88,6 +92,17 @@ void Image::Show(char *winname)
 	{
 		for (int j = 0; j < this->width; j++)
 		{
+			if (this->data[i][j] < 1)
+			{
+				img_data[i*widthstep + j] = 0;
+				continue;
+			}
+			if (this->data[i][j] > 254)
+			{
+				img_data[i*widthstep + j] = 255;
+				continue;
+			}
+
 			img_data[i*widthstep + j] = (unsigned char)this->data[i][j];
 		}
 	}
@@ -143,6 +158,24 @@ void Image::Flip(int code)
 	}
 }
 
+
+void Image::Resize(int h, int w)
+{
+	Image origin = *this;
+	this->init(h, w);
+	for (int i = 0; i < this->height; i++)
+		for (int j = 0; j < this->width; j++)
+		{
+			if (i < origin.height && j < origin.width)
+			{
+				this->data[i][j] = origin.data[i][j];
+			}
+			else
+			{
+				this->data[i][j] = 255 / 2;
+			}
+		}
+}
 /*
 //Í¼ÏñËõÐ¡£¬·Å´ó
 void Image::Resize(int code)
@@ -392,4 +425,37 @@ double Image::Variance()
 	var /= this->height * this->width;
 
 	return var;
+}
+
+Image Image::operator-()
+{
+	Image img(this->height, this->width);
+	
+	for (int i = 0; i < this->height; i++)
+		for (int j = 0; j < this->width; j++)
+		{
+			img.data[i][j] = 255 - this->data[i][j];
+		}
+
+	return img;
+}
+
+Image Image::gray2bw(double t)
+{
+	Image img(this->height, this->width);
+	this->Normalize();
+	for (int i = 0; i < this->height; i++)
+		for (int j = 0; j < this->width; j++)
+		{
+			if (this->data[i][j] > t)
+			{
+				img.data[i][j] = 255;
+			}
+			else
+			{
+				img.data[i][j] = 0;
+			}
+		}
+
+	return img;
 }
