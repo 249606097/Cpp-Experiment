@@ -146,7 +146,7 @@ int Date::operator-(Date one)
     
     int total = 0;
 
-    if (this->year < year || (this->year == year && this->month < month) || (this->year == year && this->month == month && this->day < day))
+    if (this->year < year || (this->year == year && this->month < month) || (this->year == year && this->month == month && this->day <= day))
     {   
         int y=year-1;
         while (y > this->year)

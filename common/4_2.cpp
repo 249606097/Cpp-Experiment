@@ -153,7 +153,7 @@ int Date::daysTo(Date &date)
     int month = date.month;
     int day = date.day;    
     
-    if (this->year < year || (this->year == year && this->month < month) || (this->year == year && this->month == month && this->day < day))
+    if (this->year < year || (this->year == year && this->month < month) || (this->year == year && this->month == month && this->day <= day))
     {   
         int y=year-1;
         while (y > this->year)
