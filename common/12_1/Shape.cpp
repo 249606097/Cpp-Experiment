@@ -45,7 +45,7 @@ void Shape::set_price(double price)
 double Shape::get_price()
 {
 	return this->price;
-}
+} 
 
 int Shape::get_classId()
 {

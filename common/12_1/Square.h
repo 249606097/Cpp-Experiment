@@ -7,7 +7,7 @@ class Square: public Rectangle
 {
 	public:
 		Square(double length);
-		void print_self();
+		void print_self(); 
 };
 
 #endif

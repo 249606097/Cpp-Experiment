@@ -12,7 +12,7 @@ class Shape
 
 		void set_price(double price);
 		double get_price();
-		int get_classId();
+		int get_classId(); 
 
 	protected:
 		double Circumference = 0;

@@ -11,7 +11,7 @@ class RightTriangle : public Shape
 		void print_self();
 
 	private:
-		double catheti_1; // Ö±½Ç±ß
+		double catheti_1; // Ö±½Ç±ß 
 		double catheti_2;
 };
 

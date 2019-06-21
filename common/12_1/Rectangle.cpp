@@ -23,7 +23,7 @@ double Rectangle::getCircumference()
 void Rectangle::print_self()
 {
 	//cout << "长方形，" << "长" << this->length << "，" << "宽" << this->width << "，";
-	//this->printCircumference();
+	//this->printCircumference(); 
 	cout << setw(8) << "长方形：" << this->get_classId() << ' ' << "Rectangle" << ' ' << "width:" << this->width << ' ' << "height:" << this->length;
 	cout << ' ' << "price:" << this->get_price() << endl;
 }

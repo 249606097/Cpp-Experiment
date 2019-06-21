@@ -23,7 +23,7 @@ double RightTriangle::getCircumference()
 void RightTriangle::print_self()
 {
 	//cout << "三角形，" << "直角边" << this->catheti_1 << "，" << "直角边" << this->catheti_2 << "，";
-	//this->printCircumference();
+	//this->printCircumference(); 
 	cout << setw(8) << "三角形：" << this->get_classId() << ' ' << "RightTriangle" << ' ' << "catheti:" << this->catheti_1 << ' ' << this->catheti_2;
 	cout << ' ' << "price:" << this->get_price() << endl;
 }

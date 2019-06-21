@@ -12,7 +12,7 @@ public:
 	~FileNotFoundException() {}
 	const string &getMessage() { return message; }
 private:
-	string message;
+	string message; 
 };
 
 

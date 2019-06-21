@@ -9,7 +9,7 @@ Circle::Circle(double radius)
 {
 	this->classId = 1;
 
-	this->radius = radius;
+	this->radius = radius; 
 	
 	this->Circumference = getCircumference();
 }

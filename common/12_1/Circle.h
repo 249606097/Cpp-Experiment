@@ -11,7 +11,7 @@ class Circle: public Shape
 		void print_self();
 
 	private:
-		double radius;
+		double radius; 
 };
 
 

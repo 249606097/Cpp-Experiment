@@ -1,4 +1,4 @@
-#include <iostream>
+﻿#include <iostream>
 #include <cstdlib>
 #include <fstream>
 #include <string>
@@ -34,7 +34,7 @@ int main()
 		while (!fp.eof())
 		{
 			fp >> s;
-			//cout << stof(s.substr(0, s.length() - 1)) << endl;
+			//cout << stof(s.substr(0, s.length() - 1)) << endl; 
 			cout << s;
 
 			switch ((int)stof(s.substr(0, s.length() - 1)))

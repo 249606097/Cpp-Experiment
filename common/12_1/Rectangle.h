@@ -10,7 +10,7 @@ class Rectangle: public Shape
 		double getCircumference();
 		void print_self();
 
-		double get_length();
+		double get_length(); 
 
 	private:
 		double length;
