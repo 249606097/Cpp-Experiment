@@ -1,4 +1,4 @@
-#include <iostream>
+Ôªø#include <iostream>
 #include <cstdlib>
 #include <fstream>
 #include <string>
@@ -19,11 +19,11 @@ int main()
 
 	fstream fp;
 
-	// ∂¡±Í◊ºŒƒº˛
+	// ËØªÊ†áÂáÜÊñá‰ª∂
 	int total = 0;
 	try
 	{ 
-		fp.open("Shapes.txt");
+		fp.open("D:\\Study\\workstation\\vs2015_files\\Project5\\Debug\\Shapes.txt");
 
 		if (!fp)
 		{
@@ -64,7 +64,7 @@ int main()
 			cout << s;
 
 			fp >> s;
-			cout << stof(s) << endl; // stof() Ω´◊÷∑˚¥Æ ˝◊÷ ◊™ªØ≥… float 
+			cout << stof(s) << endl; // stof() Â∞ÜÂ≠óÁ¨¶‰∏≤Êï∞Â≠ó ËΩ¨ÂåñÊàê float 
 			arr[total]->set_price(stof(s));
 
 			total++;
@@ -80,7 +80,7 @@ int main()
 
 	fp.close();
 
-	// ≈≈–Ú
+	// ÊéíÂ∫è
 	int max;
 	for (int m = 0; m < total; m++)
 	{
@@ -108,34 +108,34 @@ int main()
 	}
 	cout << endl;
 
-	// Ω´¿‡–¥»ÎŒƒº˛
+	// Â∞ÜÁ±ªÂÜôÂÖ•Êñá‰ª∂
 	for (int i = 0; i < 4; i++)
 	{
 		switch (arr[i]->get_classId())
 		{
 		case 1:
-			fp.open("Circle.dat", ios::out | ios::binary);
+			fp.open("D:\\Study\\workstation\\vs2015_files\\Project5\\Debug\\Circle.dat", ios::out | ios::binary);
 			fp.write((char*)arr[i], sizeof(Circle));
 			fp.close();
 
 			break;
 
 		case 2:
-			fp.open("Rectangle.dat", ios::out | ios::binary);
+			fp.open("D:\\Study\\workstation\\vs2015_files\\Project5\\Debug\\Rectangle.dat", ios::out | ios::binary);
 			fp.write((char*)arr[i], sizeof(Rectangle));
 			fp.close();
 
 			break;
 
 		case 3:
-			fp.open("Rightrangle.dat", ios::out | ios::binary);
+			fp.open("D:\\Study\\workstation\\vs2015_files\\Project5\\Debug\\Rightrangle.dat", ios::out | ios::binary);
 			fp.write((char*)arr[i], sizeof(RightTriangle));
 			fp.close();
 
 			break;
 
 		case 4:
-			fp.open("Square.dat", ios::out | ios::binary);
+			fp.open("D:\\Study\\workstation\\vs2015_files\\Project5\\Debug\\Square.dat", ios::out | ios::binary);
 			fp.write((char*)arr[i], sizeof(Square));
 			fp.close();
 
@@ -143,27 +143,27 @@ int main()
 		}
 	}
 
-	// ¥”Œƒº˛∂¡≥ˆ ˝æ› 
+	// ‰ªéÊñá‰ª∂ËØªÂá∫Êï∞ÊçÆ 
 	Circle temp_circle = Circle(0);
-	fp.open("Circle.dat", ios::in | ios::binary);
+	fp.open("D:\\Study\\workstation\\vs2015_files\\Project5\\Debug\\Circle.dat", ios::in | ios::binary);
 	fp.read((char*)&temp_circle, sizeof(Circle));
 	temp_circle.print_self();
 	fp.close();
 
 	Rectangle temp_rectangle = Rectangle(0, 0);
-	fp.open("Rectangle.dat", ios::in | ios::binary);
+	fp.open("D:\\Study\\workstation\\vs2015_files\\Project5\\Debug\\Rectangle.dat", ios::in | ios::binary);
 	fp.read((char*)&temp_rectangle, sizeof(Rectangle));
 	temp_rectangle.print_self();
 	fp.close();
 
 	RightTriangle temp_rightTriangle = RightTriangle(0, 0);
-	fp.open("Rightrangle.dat", ios::in | ios::binary);
+	fp.open("D:\\Study\\workstation\\vs2015_files\\Project5\\Debug\\Rightrangle.dat", ios::in | ios::binary);
 	fp.read((char*)&temp_rightTriangle, sizeof(RightTriangle));
 	temp_rightTriangle.print_self();
 	fp.close();
 
 	Square temp_square = Square(0);
-	fp.open("Square.dat", ios::in | ios::binary);
+	fp.open("D:\\Study\\workstation\\vs2015_files\\Project5\\Debug\\Square.dat", ios::in | ios::binary);
 	fp.read((char*)&temp_square, sizeof(Square));
 	temp_square.print_self();
 	fp.close();
