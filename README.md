@@ -1,4 +1,4 @@
-# Cpp-Learning
+# Cpp-Experiment
 
 Here are some source codes of the experiments of the course Object-Oriented Programming taught by Mr Qi Lin, Ocean University of China.
 
