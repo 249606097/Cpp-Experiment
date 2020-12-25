@@ -1,6 +1,4 @@
-# Cpp_Learning
-
-###### This repository belongs to Leo.
+# Cpp-Learning
 
 Here are some source codes of the experiments of the course Object-Oriented Programming taught by Mr Qi Lin, Ocean University of China.
 
@@ -11,7 +9,5 @@ These source codes include the common experiments and some special experiments w
 These source codes are edited in IDE VS Code or Visual Studio.
 
 This repository was created in 2019.
-
-
 
 If you like it, give me a star.
